@@ -39,3 +39,4 @@ Expanded state
 | iconCollapsed     | Widget     | Allows a widget to replace the icon in the read more/less button in the collapsed state.                                |
 | iconExpanded      | Widget     | Allows a widget to replace the icon in the read more/less button in the expanded state.                                 |
 | iconColor         | Color      | The color of the icon in the read more/less button. Does not work when [iconCollapsed] or [iconExpanded] are specified. |
+| buttonTextStyle   | TextStyle  | The textstyle used for the read more/less button                                                                        |

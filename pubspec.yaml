@@ -1,6 +1,6 @@
 name: read_more_less
 description: Provides a widget that shows a read more/less button in case the text exceeds the maxHeight provided in the widget.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/DutchCodingCompany/read_more_less
 
 environment:

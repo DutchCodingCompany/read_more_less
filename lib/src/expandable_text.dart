@@ -13,6 +13,7 @@ class ExpandableText extends StatefulWidget {
     this.iconExpanded,
     this.textAlign = TextAlign.center,
     this.iconColor = Colors.black,
+    this.buttonTextStyle,
   }) : super(key: key);
 
   final String text;
@@ -25,6 +26,7 @@ class ExpandableText extends StatefulWidget {
   final Widget? iconCollapsed;
   final TextAlign textAlign;
   final Color iconColor;
+  final TextStyle? buttonTextStyle;
 
   @override
   _ExpandableTextState createState() => _ExpandableTextState();
@@ -58,7 +60,8 @@ class _ExpandableTextState extends State<ExpandableText> {
                 child: TextButton.icon(
                   icon: Text(
                     widget.readLessText ?? 'Read less',
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: widget.buttonTextStyle ??
+                        Theme.of(context).textTheme.subtitle1,
                   ),
                   label: widget.iconExpanded ??
                       Icon(
@@ -71,8 +74,8 @@ class _ExpandableTextState extends State<ExpandableText> {
             : TextButton.icon(
                 icon: Text(
                   widget.readMoreText ?? 'Read more',
-                  style:
-                      widget.textStyle ?? Theme.of(context).textTheme.subtitle1,
+                  style: widget.buttonTextStyle ??
+                      Theme.of(context).textTheme.subtitle1,
                 ),
                 label: widget.iconCollapsed ??
                     Icon(

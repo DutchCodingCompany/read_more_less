@@ -14,6 +14,7 @@ class ReadMoreLess extends StatelessWidget {
     this.iconCollapsed,
     this.iconExpanded,
     this.iconColor = Colors.black,
+    this.buttonTextStyle,
   }) : super(key: key);
 
   /// The main text to be displayed.
@@ -45,6 +46,9 @@ class ReadMoreLess extends StatelessWidget {
 
   /// The color of the icon in the read more/less button. Does not work when [iconCollapsed] or [iconExpanded] are specified.
   final Color iconColor;
+
+  /// The textstyle used for the read more/less button
+  final TextStyle? buttonTextStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +86,7 @@ class ReadMoreLess extends StatelessWidget {
                     iconCollapsed: iconCollapsed,
                     iconExpanded: iconExpanded,
                     iconColor: iconColor,
+                    buttonTextStyle: buttonTextStyle,
                   )
                 : Text(text,
                     softWrap: true,

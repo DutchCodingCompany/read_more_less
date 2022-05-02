@@ -5,3 +5,7 @@
 ## 0.0.2
 
 - Downgraded min Dart SDK to 2.12.x
+
+## 0.0.3
+
+- Added buttonTextStyle
