@@ -17,6 +17,14 @@ ReadMoreLess(
 ),
 ```
 
+## Screenshots
+
+Collapsed state
+![Collapsed mode](assets/screen1.png)
+
+Expanded state
+![Expanded mode](assets/screen2.png)
+
 ## Parameters
 
 | Parameter         | Type       | Description                                                                                                             |
