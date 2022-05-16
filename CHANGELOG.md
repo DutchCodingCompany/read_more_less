@@ -9,3 +9,7 @@
 ## 0.0.3
 
 - Added buttonTextStyle
+
+## 0.0.4
+
+- Added example gif and removed static images

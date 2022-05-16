@@ -19,11 +19,8 @@ ReadMoreLess(
 
 ## Screenshots
 
-Collapsed state
-![Collapsed mode](assets/screen1.png)
-
-Expanded state
-![Expanded mode](assets/screen2.png)
+Example gif:
+![Example](assets/example.gif)
 
 ## Parameters
 
