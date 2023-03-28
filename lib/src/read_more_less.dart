@@ -10,6 +10,7 @@ class ReadMoreLess extends StatelessWidget {
     this.readMoreText,
     this.animationDuration = const Duration(milliseconds: 200),
     this.maxHeight = 70,
+    this.maxLines = 4,
     this.textStyle,
     this.textAlign = TextAlign.center,
     this.iconCollapsed,
@@ -32,6 +33,9 @@ class ReadMoreLess extends StatelessWidget {
 
   /// The maximum height of container around the [text] in the collapsed state.
   final double maxHeight;
+
+  /// The maximum number of lines of the [text] in the collapsed state.
+  final int maxLines;
 
   /// The main textstyle used for [text]
   final TextStyle? textStyle;
@@ -67,7 +71,7 @@ class ReadMoreLess extends StatelessWidget {
             );
 
             final tp = TextPainter(
-              maxLines: 4,
+              maxLines: maxLines,
               textAlign: textAlign,
               textDirection: TextDirection.ltr,
               text: span,
