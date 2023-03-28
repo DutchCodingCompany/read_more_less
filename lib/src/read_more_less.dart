@@ -9,7 +9,7 @@ class ReadMoreLess extends StatelessWidget {
     this.readLessText,
     this.readMoreText,
     this.animationDuration = const Duration(milliseconds: 200),
-    this.maxHeight = 70,
+    this.collapsedHeight = 70,
     this.maxLines = 4,
     this.textStyle,
     this.textAlign = TextAlign.center,
@@ -31,8 +31,8 @@ class ReadMoreLess extends StatelessWidget {
   /// The duration of the animation when transitioning between read more and read less.
   final Duration animationDuration;
 
-  /// The maximum height of container around the [text] in the collapsed state.
-  final double maxHeight;
+  /// The height of the [text] in the collapsed state.
+  final double collapsedHeight;
 
   /// The maximum number of lines of the [text] in the collapsed state.
   final int maxLines;
@@ -84,7 +84,7 @@ class ReadMoreLess extends StatelessWidget {
                 ? ExpandableText(
                     text: text,
                     animationDuration: animationDuration,
-                    maxHeight: maxHeight,
+                    maxHeight: collapsedHeight,
                     readLessText: readLessText,
                     readMoreText: readMoreText,
                     textAlign: textAlign,

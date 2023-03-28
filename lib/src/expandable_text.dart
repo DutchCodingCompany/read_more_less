@@ -7,7 +7,7 @@ class ExpandableText extends StatefulWidget {
     this.readLessText,
     this.readMoreText,
     this.animationDuration = const Duration(milliseconds: 200),
-    this.maxHeight = 70,
+    this.collapsedHeight = 70,
     this.textStyle,
     this.iconCollapsed,
     this.iconExpanded,
@@ -20,7 +20,7 @@ class ExpandableText extends StatefulWidget {
   final String? readLessText;
   final String? readMoreText;
   final Duration animationDuration;
-  final double maxHeight;
+  final double collapsedHeight;
   final TextStyle? textStyle;
   final Widget? iconExpanded;
   final Widget? iconCollapsed;
@@ -49,7 +49,7 @@ class _ExpandableTextState extends State<ExpandableText> {
         AnimatedCrossFade(
           duration: widget.animationDuration,
           firstChild: ConstrainedBox(
-            constraints: BoxConstraints(maxHeight: widget.maxHeight),
+            constraints: BoxConstraints(maxHeight: widget.collapsedHeight),
             child: Text(
               widget.text,
               softWrap: true,

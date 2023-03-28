@@ -59,7 +59,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et lobortis e
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: ReadMoreLess(
-              maxHeight: 20,
+              collapsedHeight: 20,
               text: content,
               readMoreText: 'I want to read more!',
               readLessText: 'This is enough, read less',
@@ -125,7 +125,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et lobortis e
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: ReadMoreLess(
-              maxHeight: 20,
+              collapsedHeight: 20,
               text: content,
             ),
           ),
@@ -180,7 +180,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et lobortis e
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: ReadMoreLess(
-              maxHeight: 30,
+              collapsedHeight: 30,
               maxLines: 2,
               text: content,
             ),
@@ -203,7 +203,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et lobortis e
       child: Directionality(
         textDirection: TextDirection.ltr,
         child: ReadMoreLess(
-          maxHeight: 30,
+          collapsedHeight: 30,
           maxLines: 2,
           text: content,
           iconCollapsed: Text('Collapsed'),
