@@ -50,7 +50,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et lobortis e
       expect(find.text('Read less'), findsNothing);
     });
 
-    testWidgets('ReadMoreLess Widget can have custom read more or less text', (WidgetTester tester) async {
+    testWidgets('can have custom read more or less text', (WidgetTester tester) async {
       // Build our app and trigger a frame.
       await tester.pumpWidget(
         const SizedBox(
