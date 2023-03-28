@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:read_more_less/src/expandable_text.dart';
+
+import 'expandable_text.dart';
 
 class ReadMoreLess extends StatelessWidget {
   const ReadMoreLess({
@@ -59,8 +60,10 @@ class ReadMoreLess extends StatelessWidget {
             final span = TextSpan(
               text: text,
               style: textStyle ??
-                  Theme.of(context).textTheme.subtitle1?.copyWith(
-                      color: Theme.of(context).textTheme.bodyText2?.color),
+                  Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(color: Theme.of(context).textTheme.bodyMedium?.color),
             );
 
             final tp = TextPainter(
@@ -92,7 +95,7 @@ class ReadMoreLess extends StatelessWidget {
                     softWrap: true,
                     overflow: TextOverflow.fade,
                     textAlign: textAlign,
-                    style: textStyle ?? Theme.of(context).textTheme.subtitle1);
+                    style: textStyle ?? Theme.of(context).textTheme.titleMedium);
           },
         ),
       ],

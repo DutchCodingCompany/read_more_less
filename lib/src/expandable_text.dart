@@ -29,7 +29,7 @@ class ExpandableText extends StatefulWidget {
   final TextStyle? buttonTextStyle;
 
   @override
-  _ExpandableTextState createState() => _ExpandableTextState();
+  State<ExpandableText> createState() => _ExpandableTextState();
 }
 
 class _ExpandableTextState extends State<ExpandableText> {
@@ -42,15 +42,13 @@ class _ExpandableTextState extends State<ExpandableText> {
         AnimatedSize(
           duration: widget.animationDuration,
           child: ConstrainedBox(
-            constraints: isExpanded
-                ? const BoxConstraints()
-                : BoxConstraints(maxHeight: widget.maxHeight),
+            constraints: isExpanded ? const BoxConstraints() : BoxConstraints(maxHeight: widget.maxHeight),
             child: Text(
               widget.text,
               softWrap: true,
               overflow: TextOverflow.fade,
               textAlign: widget.textAlign,
-              style: widget.textStyle ?? Theme.of(context).textTheme.subtitle1,
+              style: widget.textStyle ?? Theme.of(context).textTheme.titleMedium,
             ),
           ),
         ),
@@ -60,8 +58,7 @@ class _ExpandableTextState extends State<ExpandableText> {
                 child: TextButton.icon(
                   icon: Text(
                     widget.readLessText ?? 'Read less',
-                    style: widget.buttonTextStyle ??
-                        Theme.of(context).textTheme.subtitle1,
+                    style: widget.buttonTextStyle ?? Theme.of(context).textTheme.titleMedium,
                   ),
                   label: widget.iconExpanded ??
                       Icon(
@@ -74,8 +71,7 @@ class _ExpandableTextState extends State<ExpandableText> {
             : TextButton.icon(
                 icon: Text(
                   widget.readMoreText ?? 'Read more',
-                  style: widget.buttonTextStyle ??
-                      Theme.of(context).textTheme.subtitle1,
+                  style: widget.buttonTextStyle ?? Theme.of(context).textTheme.titleMedium,
                 ),
                 label: widget.iconCollapsed ??
                     Icon(
