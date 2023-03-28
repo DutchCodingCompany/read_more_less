@@ -55,33 +55,32 @@ class ReadMoreLess extends StatelessWidget {
   /// The textstyle used for the read more/less button
   final TextStyle? buttonTextStyle;
 
+  bool exceedsMaxLines(BuildContext context, BoxConstraints size) {
+    final span = TextSpan(
+      text: text,
+      style: textStyle ??
+          Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).textTheme.bodyMedium?.color),
+    );
+
+    final tp = TextPainter(
+      maxLines: maxLines,
+      textAlign: textAlign,
+      textDirection: TextDirection.ltr,
+      text: span,
+    );
+
+    tp.layout(maxWidth: size.maxWidth);
+
+    return tp.didExceedMaxLines;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         LayoutBuilder(
           builder: (context, size) {
-            final span = TextSpan(
-              text: text,
-              style: textStyle ??
-                  Theme.of(context)
-                      .textTheme
-                      .titleMedium
-                      ?.copyWith(color: Theme.of(context).textTheme.bodyMedium?.color),
-            );
-
-            final tp = TextPainter(
-              maxLines: maxLines,
-              textAlign: textAlign,
-              textDirection: TextDirection.ltr,
-              text: span,
-            );
-
-            tp.layout(maxWidth: size.maxWidth);
-
-            final isExceeded = tp.didExceedMaxLines;
-
-            return isExceeded
+            return exceedsMaxLines(context, size)
                 ? ExpandableText(
                     text: text,
                     animationDuration: animationDuration,
