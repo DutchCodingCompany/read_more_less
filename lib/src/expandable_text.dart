@@ -33,16 +33,23 @@ class ExpandableText extends StatefulWidget {
 }
 
 class _ExpandableTextState extends State<ExpandableText> {
-  bool isExpanded = false;
+  CrossFadeState _crossFadeState = CrossFadeState.showFirst;
+
+  void _toggleExpand() {
+    setState(() {
+      _crossFadeState =
+          _crossFadeState == CrossFadeState.showSecond ? CrossFadeState.showFirst : CrossFadeState.showSecond;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        AnimatedSize(
+        AnimatedCrossFade(
           duration: widget.animationDuration,
-          child: ConstrainedBox(
-            constraints: isExpanded ? const BoxConstraints() : BoxConstraints(maxHeight: widget.maxHeight),
+          firstChild: ConstrainedBox(
+            constraints: BoxConstraints(maxHeight: widget.maxHeight),
             child: Text(
               widget.text,
               softWrap: true,
@@ -51,8 +58,16 @@ class _ExpandableTextState extends State<ExpandableText> {
               style: widget.textStyle ?? Theme.of(context).textTheme.titleMedium,
             ),
           ),
+          secondChild: Text(
+            widget.text,
+            softWrap: true,
+            overflow: TextOverflow.fade,
+            textAlign: widget.textAlign,
+            style: widget.textStyle ?? Theme.of(context).textTheme.titleMedium,
+          ),
+          crossFadeState: _crossFadeState,
         ),
-        isExpanded
+        _crossFadeState == CrossFadeState.showSecond
             ? ConstrainedBox(
                 constraints: const BoxConstraints(),
                 child: TextButton.icon(
@@ -65,7 +80,7 @@ class _ExpandableTextState extends State<ExpandableText> {
                         Icons.arrow_drop_up,
                         color: widget.iconColor,
                       ),
-                  onPressed: () => setState(() => isExpanded = false),
+                  onPressed: _toggleExpand,
                 ),
               )
             : TextButton.icon(
@@ -78,7 +93,7 @@ class _ExpandableTextState extends State<ExpandableText> {
                       Icons.arrow_drop_down,
                       color: widget.iconColor,
                     ),
-                onPressed: () => setState(() => isExpanded = true),
+                onPressed: _toggleExpand,
               )
       ],
     );
