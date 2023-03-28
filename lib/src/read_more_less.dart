@@ -84,7 +84,7 @@ class ReadMoreLess extends StatelessWidget {
                 ? ExpandableText(
                     text: text,
                     animationDuration: animationDuration,
-                    maxHeight: collapsedHeight,
+                    collapsedHeight: collapsedHeight,
                     readLessText: readLessText,
                     readMoreText: readMoreText,
                     textAlign: textAlign,
