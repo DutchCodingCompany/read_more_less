@@ -19,15 +19,15 @@ class ReadMoreLess extends StatelessWidget {
     this.iconColor = Colors.black,
     this.buttonTextStyle,
   })  : assert(
-          ((iconCollapsed != null || iconExpanded != null || iconColor != Colors.black) && customButtonBuilder != null),
+          ((iconCollapsed == null && iconExpanded == null) || customButtonBuilder == null),
           'You cannot custom icons while using a custom button builder',
         ),
         assert(
-          ((buttonTextStyle != null) && customButtonBuilder != null),
+          (buttonTextStyle == null || customButtonBuilder == null),
           'You cannot use a custom button style while using a custom button builder',
         ),
         assert(
-          ((readLessText != null || readMoreText != null) && customButtonBuilder != null),
+          ((readLessText == null && readMoreText == null) || customButtonBuilder == null),
           'You cannot provide readLess or readMore text when using a custom button builder',
         ),
         super(key: key);
@@ -89,7 +89,7 @@ class ReadMoreLess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle ts = textStyle ?? Theme.of(context).textTheme.titleMedium!;
+    TextStyle ts = textStyle ?? Theme.of(context).textTheme.bodyMedium!;
 
     return Column(
       children: <Widget>[
@@ -110,11 +110,7 @@ class ReadMoreLess extends StatelessWidget {
                     iconColor: iconColor,
                     buttonTextStyle: buttonTextStyle,
                   )
-                : Text(text,
-                    softWrap: true,
-                    overflow: TextOverflow.fade,
-                    textAlign: textAlign,
-                    style: textStyle ?? Theme.of(context).textTheme.titleMedium);
+                : Text(text, softWrap: true, overflow: TextOverflow.fade, textAlign: textAlign, style: ts);
           },
         ),
       ],

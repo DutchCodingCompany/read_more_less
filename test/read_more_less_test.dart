@@ -108,7 +108,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et lobortis e
       await tester.tap(find.text('Read more'));
       await tester.pump();
 
-      expect(tester.getSize(find.text(content).at(1)).height, equals(304.0));
+      expect(tester.getSize(find.text(content).at(1)).height, equals(238.0));
 
       await tester.tap(find.text('Read less'));
       await tester.pump();
@@ -139,7 +139,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et lobortis e
       await tester.tap(find.text('Read more'));
       await tester.pump();
 
-      expect(tester.getSize(find.text(content).at(1)).height, equals(304.0));
+      expect(tester.getSize(find.text(content).at(1)).height, equals(238.0));
 
       await tester.tap(find.text('Read less'));
       await tester.pump();
