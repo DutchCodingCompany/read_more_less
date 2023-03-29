@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'expandable_text_button.dart';
+
 class ExpandableText extends StatefulWidget {
   const ExpandableText({
     required this.text,
@@ -67,34 +69,16 @@ class _ExpandableTextState extends State<ExpandableText> {
           ),
           crossFadeState: _crossFadeState,
         ),
-        _crossFadeState == CrossFadeState.showSecond
-            ? ConstrainedBox(
-                constraints: const BoxConstraints(),
-                child: TextButton.icon(
-                  icon: Text(
-                    widget.readLessText ?? 'Read less',
-                    style: widget.buttonTextStyle ?? Theme.of(context).textTheme.titleMedium,
-                  ),
-                  label: widget.iconExpanded ??
-                      Icon(
-                        Icons.arrow_drop_up,
-                        color: widget.iconColor,
-                      ),
-                  onPressed: _toggleExpand,
-                ),
-              )
-            : TextButton.icon(
-                icon: Text(
-                  widget.readMoreText ?? 'Read more',
-                  style: widget.buttonTextStyle ?? Theme.of(context).textTheme.titleMedium,
-                ),
-                label: widget.iconCollapsed ??
-                    Icon(
-                      Icons.arrow_drop_down,
-                      color: widget.iconColor,
-                    ),
-                onPressed: _toggleExpand,
-              )
+        ExpandableTextButton(
+          expanded: _crossFadeState == CrossFadeState.showSecond,
+          toggleExpand: _toggleExpand,
+          readLessText: widget.readLessText,
+          readMoreText: widget.readMoreText,
+          iconCollapsed: widget.iconCollapsed,
+          iconExpanded: widget.iconExpanded,
+          iconColor: widget.iconColor,
+          buttonTextStyle: widget.buttonTextStyle,
+        ),
       ],
     );
   }
