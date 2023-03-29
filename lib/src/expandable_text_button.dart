@@ -31,7 +31,7 @@ class ExpandableTextButton extends StatelessWidget {
             child: TextButton.icon(
               icon: Text(
                 readLessText ?? 'Read less',
-                style: buttonTextStyle ?? Theme.of(context).textTheme.titleMedium,
+                style: buttonTextStyle,
               ),
               label: iconExpanded ??
                   Icon(
@@ -44,7 +44,7 @@ class ExpandableTextButton extends StatelessWidget {
         : TextButton.icon(
             icon: Text(
               readMoreText ?? 'Read more',
-              style: buttonTextStyle ?? Theme.of(context).textTheme.titleMedium,
+              style: buttonTextStyle,
             ),
             label: iconCollapsed ??
                 Icon(
