@@ -15,6 +15,8 @@ class ReadMoreLess extends StatelessWidget {
     this.textAlign = TextAlign.center,
     this.iconCollapsed,
     this.iconExpanded,
+    this.buttonCollapsed,
+    this.buttonExpanded,
     this.iconColor = Colors.black,
     this.buttonTextStyle,
   }) : super(key: key);
@@ -48,6 +50,12 @@ class ReadMoreLess extends StatelessWidget {
 
   /// Allows a widget to replace the icon in the read more/less button in the expanded state.
   final Widget? iconExpanded;
+
+  /// Allows a widget to replace the read more/less button in the collapsed state.
+  final Widget? buttonCollapsed;
+
+  /// Allows a widget to replace the read more/less button in the expanded state.
+  final Widget? buttonExpanded;
 
   /// The color of the icon in the read more/less button. Does not work when [iconCollapsed] or [iconExpanded] are specified.
   final Color iconColor;
@@ -89,6 +97,8 @@ class ReadMoreLess extends StatelessWidget {
                     textStyle: ts,
                     iconCollapsed: iconCollapsed,
                     iconExpanded: iconExpanded,
+                    buttonCollapsed: buttonCollapsed,
+                    buttonExpanded: buttonExpanded,
                     iconColor: iconColor,
                     buttonTextStyle: buttonTextStyle,
                   )

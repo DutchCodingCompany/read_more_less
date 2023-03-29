@@ -13,6 +13,8 @@ class ExpandableText extends StatefulWidget {
     this.collapsedHeight = 70,
     this.iconCollapsed,
     this.iconExpanded,
+    this.buttonExpanded,
+    this.buttonCollapsed,
     this.textAlign = TextAlign.center,
     this.iconColor = Colors.black,
     this.buttonTextStyle,
@@ -26,6 +28,8 @@ class ExpandableText extends StatefulWidget {
   final TextStyle textStyle;
   final Widget? iconExpanded;
   final Widget? iconCollapsed;
+  final Widget? buttonExpanded;
+  final Widget? buttonCollapsed;
   final TextAlign textAlign;
   final Color iconColor;
   final TextStyle? buttonTextStyle;
@@ -69,16 +73,27 @@ class _ExpandableTextState extends State<ExpandableText> {
           ),
           crossFadeState: _crossFadeState,
         ),
-        ExpandableTextButton(
-          expanded: _crossFadeState == CrossFadeState.showSecond,
-          toggleExpand: _toggleExpand,
-          readLessText: widget.readLessText,
-          readMoreText: widget.readMoreText,
-          iconCollapsed: widget.iconCollapsed,
-          iconExpanded: widget.iconExpanded,
-          iconColor: widget.iconColor,
-          buttonTextStyle: widget.buttonTextStyle,
-        ),
+        if (widget.buttonExpanded != null && widget.buttonCollapsed != null)
+          _crossFadeState == CrossFadeState.showSecond
+              ? GestureDetector(
+                  child: widget.buttonExpanded!,
+                  onTap: _toggleExpand,
+                )
+              : GestureDetector(
+                  child: widget.buttonCollapsed!,
+                  onTap: _toggleExpand,
+                )
+        else
+          ExpandableTextButton(
+            expanded: _crossFadeState == CrossFadeState.showSecond,
+            toggleExpand: _toggleExpand,
+            readLessText: widget.readLessText,
+            readMoreText: widget.readMoreText,
+            iconCollapsed: widget.iconCollapsed,
+            iconExpanded: widget.iconExpanded,
+            iconColor: widget.iconColor,
+            buttonTextStyle: widget.buttonTextStyle,
+          ),
       ],
     );
   }

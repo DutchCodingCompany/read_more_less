@@ -234,4 +234,55 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et lobortis e
       expect(find.text('Expanded'), findsNothing);
     });
   });
+
+  group('ReadMoreLess widget with custom buttons ', () {
+    const String content = '''
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et lobortis erat. Sed vulputate elit lacinia justo tincidunt varius. Nam convallis semper magna''';
+    SizedBox defaultWidget = SizedBox(
+      width: 600,
+      height: 1000,
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: ReadMoreLess(
+          collapsedHeight: 30,
+          maxLines: 2,
+          text: content,
+          buttonCollapsed: Container(
+            color: Colors.red,
+            height: 40,
+            width: 400,
+            child: const Text('Collapsed Container'),
+          ),
+          buttonExpanded: Container(
+            color: Colors.red,
+            height: 40,
+            width: 400,
+            child: const Text('Expanded Container'),
+          ),
+        ),
+      ),
+    );
+
+    testWidgets('shows custom collapsed and expanded widgets', (WidgetTester tester) async {
+      // Build our app and trigger a frame.
+      await tester.pumpWidget(defaultWidget);
+
+      expect(find.text('Collapsed Container'), findsOneWidget);
+      expect(find.text('Expanded Container'), findsNothing);
+
+      // Tap the custom widget and trigger a frame.
+      await tester.tap(find.text('Collapsed Container'));
+      await tester.pump();
+
+      expect(find.text('Expanded Container'), findsOneWidget);
+      expect(find.text('Collapsed Container'), findsNothing);
+
+      // Tap the custom widget and trigger a frame.
+      await tester.tap(find.text('Expanded Container'));
+      await tester.pump();
+
+      expect(find.text('Collapsed Container'), findsOneWidget);
+      expect(find.text('Expanded Container'), findsNothing);
+    });
+  });
 }
