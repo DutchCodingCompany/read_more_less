@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class ExpandableText extends StatefulWidget {
   const ExpandableText({
     required this.text,
+    required this.textStyle,
     Key? key,
     this.readLessText,
     this.readMoreText,
     this.animationDuration = const Duration(milliseconds: 200),
     this.collapsedHeight = 70,
-    this.textStyle,
     this.iconCollapsed,
     this.iconExpanded,
     this.textAlign = TextAlign.center,
@@ -21,7 +21,7 @@ class ExpandableText extends StatefulWidget {
   final String? readMoreText;
   final Duration animationDuration;
   final double collapsedHeight;
-  final TextStyle? textStyle;
+  final TextStyle textStyle;
   final Widget? iconExpanded;
   final Widget? iconCollapsed;
   final TextAlign textAlign;
@@ -55,7 +55,7 @@ class _ExpandableTextState extends State<ExpandableText> {
               softWrap: true,
               overflow: TextOverflow.fade,
               textAlign: widget.textAlign,
-              style: widget.textStyle ?? Theme.of(context).textTheme.titleMedium,
+              style: widget.textStyle,
             ),
           ),
           secondChild: Text(
@@ -63,7 +63,7 @@ class _ExpandableTextState extends State<ExpandableText> {
             softWrap: true,
             overflow: TextOverflow.fade,
             textAlign: widget.textAlign,
-            style: widget.textStyle ?? Theme.of(context).textTheme.titleMedium,
+            style: widget.textStyle,
           ),
           crossFadeState: _crossFadeState,
         ),
