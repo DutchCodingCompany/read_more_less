@@ -22,14 +22,6 @@ analyzer:
     strict-inference: true
     strict-raw-types: true
 
-  exclude:
-    - lib/**/*.g.dart
-    - lib/**/*.gr.dart
-    - lib/**/*.gen.dart
-    - lib/**/*.freezed.dart
-    - lib/**/*.chopper.dart
-    - lib/**/*.config.dart
-
   errors:
     invalid_annotation_target: ignore
 
