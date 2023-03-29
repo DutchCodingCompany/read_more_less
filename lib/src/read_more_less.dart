@@ -18,7 +18,19 @@ class ReadMoreLess extends StatelessWidget {
     this.customButtonBuilder,
     this.iconColor = Colors.black,
     this.buttonTextStyle,
-  }) : super(key: key);
+  })  : assert(
+          ((iconCollapsed != null || iconExpanded != null || iconColor != Colors.black) && customButtonBuilder != null),
+          'You cannot custom icons while using a custom button builder',
+        ),
+        assert(
+          ((buttonTextStyle != null) && customButtonBuilder != null),
+          'You cannot use a custom button style while using a custom button builder',
+        ),
+        assert(
+          ((readLessText != null || readMoreText != null) && customButtonBuilder != null),
+          'You cannot provide readLess or readMore text when using a custom button builder',
+        ),
+        super(key: key);
 
   /// The main text to be displayed.
   final String text;
