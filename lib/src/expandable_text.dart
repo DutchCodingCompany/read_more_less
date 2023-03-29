@@ -13,8 +13,7 @@ class ExpandableText extends StatefulWidget {
     this.collapsedHeight = 70,
     this.iconCollapsed,
     this.iconExpanded,
-    this.buttonExpanded,
-    this.buttonCollapsed,
+    this.customButtonBuilder,
     this.textAlign = TextAlign.center,
     this.iconColor = Colors.black,
     this.buttonTextStyle,
@@ -28,8 +27,7 @@ class ExpandableText extends StatefulWidget {
   final TextStyle textStyle;
   final Widget? iconExpanded;
   final Widget? iconCollapsed;
-  final Widget? buttonExpanded;
-  final Widget? buttonCollapsed;
+  final Widget Function(bool isCollapsed, VoidCallback onPressed)? customButtonBuilder;
   final TextAlign textAlign;
   final Color iconColor;
   final TextStyle? buttonTextStyle;
@@ -73,16 +71,8 @@ class _ExpandableTextState extends State<ExpandableText> {
           ),
           crossFadeState: _crossFadeState,
         ),
-        if (widget.buttonExpanded != null && widget.buttonCollapsed != null)
-          _crossFadeState == CrossFadeState.showSecond
-              ? GestureDetector(
-                  child: widget.buttonExpanded!,
-                  onTap: _toggleExpand,
-                )
-              : GestureDetector(
-                  child: widget.buttonCollapsed!,
-                  onTap: _toggleExpand,
-                )
+        if (widget.customButtonBuilder != null)
+          widget.customButtonBuilder!(_crossFadeState == CrossFadeState.showFirst, _toggleExpand)
         else
           ExpandableTextButton(
             expanded: _crossFadeState == CrossFadeState.showSecond,

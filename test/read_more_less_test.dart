@@ -238,6 +238,28 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et lobortis e
   group('ReadMoreLess widget with custom buttons ', () {
     const String content = '''
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et lobortis erat. Sed vulputate elit lacinia justo tincidunt varius. Nam convallis semper magna''';
+    Widget customButtonBuilder(bool isCollapsed, VoidCallback onPressed) {
+      return isCollapsed
+          ? GestureDetector(
+              onTap: onPressed,
+              child: Container(
+                color: Colors.red,
+                height: 40,
+                width: 400,
+                child: const Text('Collapsed Container'),
+              ),
+            )
+          : GestureDetector(
+              onTap: onPressed,
+              child: Container(
+                color: Colors.red,
+                height: 40,
+                width: 400,
+                child: const Text('Expanded Container'),
+              ),
+            );
+    }
+
     SizedBox defaultWidget = SizedBox(
       width: 600,
       height: 1000,
@@ -247,18 +269,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et lobortis e
           collapsedHeight: 30,
           maxLines: 2,
           text: content,
-          buttonCollapsed: Container(
-            color: Colors.red,
-            height: 40,
-            width: 400,
-            child: const Text('Collapsed Container'),
-          ),
-          buttonExpanded: Container(
-            color: Colors.red,
-            height: 40,
-            width: 400,
-            child: const Text('Expanded Container'),
-          ),
+          customButtonBuilder: customButtonBuilder,
         ),
       ),
     );

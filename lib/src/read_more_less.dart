@@ -15,8 +15,7 @@ class ReadMoreLess extends StatelessWidget {
     this.textAlign = TextAlign.center,
     this.iconCollapsed,
     this.iconExpanded,
-    this.buttonCollapsed,
-    this.buttonExpanded,
+    this.customButtonBuilder,
     this.iconColor = Colors.black,
     this.buttonTextStyle,
   }) : super(key: key);
@@ -51,11 +50,9 @@ class ReadMoreLess extends StatelessWidget {
   /// Allows a widget to replace the icon in the read more/less button in the expanded state.
   final Widget? iconExpanded;
 
-  /// Allows a widget to replace the read more/less button in the collapsed state.
-  final Widget? buttonCollapsed;
-
-  /// Allows a widget to replace the read more/less button in the expanded state.
-  final Widget? buttonExpanded;
+  /// Allows for a function that builds a custom clickable widget. [isCollapsed] is provided to detimine in what state
+  /// the widget has to be built. [onPressed] is provided to allow for the widget to be clickable and to trigger the collapsed state.
+  final Widget Function(bool isCollapsed, VoidCallback onPressed)? customButtonBuilder;
 
   /// The color of the icon in the read more/less button. Does not work when [iconCollapsed] or [iconExpanded] are specified.
   final Color iconColor;
@@ -97,8 +94,7 @@ class ReadMoreLess extends StatelessWidget {
                     textStyle: ts,
                     iconCollapsed: iconCollapsed,
                     iconExpanded: iconExpanded,
-                    buttonCollapsed: buttonCollapsed,
-                    buttonExpanded: buttonExpanded,
+                    customButtonBuilder: customButtonBuilder,
                     iconColor: iconColor,
                     buttonTextStyle: buttonTextStyle,
                   )
