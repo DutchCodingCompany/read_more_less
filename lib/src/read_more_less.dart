@@ -20,7 +20,7 @@ class ReadMoreLess extends StatelessWidget {
     this.buttonTextStyle,
   })  : assert(
           ((iconCollapsed == null && iconExpanded == null) || customButtonBuilder == null),
-          'You cannot custom icons while using a custom button builder',
+          'You cannot use custom icons while using a custom button builder',
         ),
         assert(
           (buttonTextStyle == null || customButtonBuilder == null),
