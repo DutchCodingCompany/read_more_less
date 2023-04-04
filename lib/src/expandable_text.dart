@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'expandable_text_button.dart';
+
 class ExpandableText extends StatefulWidget {
   const ExpandableText({
     required this.text,
+    required this.textStyle,
     Key? key,
     this.readLessText,
     this.readMoreText,
     this.animationDuration = const Duration(milliseconds: 200),
-    this.maxHeight = 70,
-    this.textStyle,
+    this.collapsedHeight = 70,
     this.iconCollapsed,
     this.iconExpanded,
+    this.customButtonBuilder,
     this.textAlign = TextAlign.center,
     this.iconColor = Colors.black,
     this.buttonTextStyle,
@@ -20,70 +23,67 @@ class ExpandableText extends StatefulWidget {
   final String? readLessText;
   final String? readMoreText;
   final Duration animationDuration;
-  final double maxHeight;
-  final TextStyle? textStyle;
+  final double collapsedHeight;
+  final TextStyle textStyle;
   final Widget? iconExpanded;
   final Widget? iconCollapsed;
+  final Widget Function(bool isCollapsed, VoidCallback onPressed)? customButtonBuilder;
   final TextAlign textAlign;
   final Color iconColor;
   final TextStyle? buttonTextStyle;
 
   @override
-  _ExpandableTextState createState() => _ExpandableTextState();
+  State<ExpandableText> createState() => _ExpandableTextState();
 }
 
 class _ExpandableTextState extends State<ExpandableText> {
-  bool isExpanded = false;
+  CrossFadeState _crossFadeState = CrossFadeState.showFirst;
+
+  void _toggleExpand() {
+    setState(() {
+      _crossFadeState =
+          _crossFadeState == CrossFadeState.showSecond ? CrossFadeState.showFirst : CrossFadeState.showSecond;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        AnimatedSize(
+        AnimatedCrossFade(
           duration: widget.animationDuration,
-          child: ConstrainedBox(
-            constraints: isExpanded
-                ? const BoxConstraints()
-                : BoxConstraints(maxHeight: widget.maxHeight),
+          firstChild: ConstrainedBox(
+            constraints: BoxConstraints(maxHeight: widget.collapsedHeight),
             child: Text(
               widget.text,
               softWrap: true,
               overflow: TextOverflow.fade,
               textAlign: widget.textAlign,
-              style: widget.textStyle ?? Theme.of(context).textTheme.subtitle1,
+              style: widget.textStyle,
             ),
           ),
+          secondChild: Text(
+            widget.text,
+            softWrap: true,
+            overflow: TextOverflow.fade,
+            textAlign: widget.textAlign,
+            style: widget.textStyle,
+          ),
+          crossFadeState: _crossFadeState,
         ),
-        isExpanded
-            ? ConstrainedBox(
-                constraints: const BoxConstraints(),
-                child: TextButton.icon(
-                  icon: Text(
-                    widget.readLessText ?? 'Read less',
-                    style: widget.buttonTextStyle ??
-                        Theme.of(context).textTheme.subtitle1,
-                  ),
-                  label: widget.iconExpanded ??
-                      Icon(
-                        Icons.arrow_drop_up,
-                        color: widget.iconColor,
-                      ),
-                  onPressed: () => setState(() => isExpanded = false),
-                ),
-              )
-            : TextButton.icon(
-                icon: Text(
-                  widget.readMoreText ?? 'Read more',
-                  style: widget.buttonTextStyle ??
-                      Theme.of(context).textTheme.subtitle1,
-                ),
-                label: widget.iconCollapsed ??
-                    Icon(
-                      Icons.arrow_drop_down,
-                      color: widget.iconColor,
-                    ),
-                onPressed: () => setState(() => isExpanded = true),
-              )
+        if (widget.customButtonBuilder != null)
+          widget.customButtonBuilder!(_crossFadeState == CrossFadeState.showFirst, _toggleExpand)
+        else
+          ExpandableTextButton(
+            expanded: _crossFadeState == CrossFadeState.showSecond,
+            toggleExpand: _toggleExpand,
+            readLessText: widget.readLessText,
+            readMoreText: widget.readMoreText,
+            iconCollapsed: widget.iconCollapsed,
+            iconExpanded: widget.iconExpanded,
+            iconColor: widget.iconColor,
+            buttonTextStyle: widget.buttonTextStyle,
+          ),
       ],
     );
   }
