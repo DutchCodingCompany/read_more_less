@@ -6,7 +6,7 @@ class ExpandableText extends StatefulWidget {
   const ExpandableText({
     required this.text,
     required this.textStyle,
-    Key? key,
+    super.key,
     this.readLessText,
     this.readMoreText,
     this.animationDuration = const Duration(milliseconds: 200),
@@ -17,7 +17,7 @@ class ExpandableText extends StatefulWidget {
     this.textAlign = TextAlign.center,
     this.iconColor = Colors.black,
     this.buttonTextStyle,
-  }) : super(key: key);
+  });
 
   final String text;
   final String? readLessText;
