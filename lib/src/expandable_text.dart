@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'expandable_text_button.dart';
+import 'html_container.dart';
 
 class ExpandableText extends StatefulWidget {
   const ExpandableText({
@@ -54,21 +55,25 @@ class _ExpandableTextState extends State<ExpandableText> {
           duration: widget.animationDuration,
           firstChild: ConstrainedBox(
             constraints: BoxConstraints(maxHeight: widget.collapsedHeight),
-            child: Text(
-              widget.text,
-              softWrap: true,
-              overflow: TextOverflow.fade,
-              textAlign: widget.textAlign,
-              style: widget.textStyle,
-            ),
+            child: widget.text.isHtml
+                ? HtmlContainer(content: widget.text)
+                : Text(
+                    widget.text,
+                    softWrap: true,
+                    overflow: TextOverflow.fade,
+                    textAlign: widget.textAlign,
+                    style: widget.textStyle,
+                  ),
           ),
-          secondChild: Text(
-            widget.text,
-            softWrap: true,
-            overflow: TextOverflow.fade,
-            textAlign: widget.textAlign,
-            style: widget.textStyle,
-          ),
+          secondChild: widget.text.isHtml
+              ? HtmlContainer(content: widget.text)
+              : Text(
+                  widget.text,
+                  softWrap: true,
+                  overflow: TextOverflow.fade,
+                  textAlign: widget.textAlign,
+                  style: widget.textStyle,
+                ),
           crossFadeState: _crossFadeState,
         ),
         if (widget.customButtonBuilder != null)
