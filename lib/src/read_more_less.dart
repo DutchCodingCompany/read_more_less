@@ -4,7 +4,7 @@ import 'expandable_text.dart';
 
 class ReadMoreLess extends StatelessWidget {
   const ReadMoreLess({
-    Key? key,
+    super.key,
     required this.text,
     this.readLessText,
     this.readMoreText,
@@ -29,8 +29,7 @@ class ReadMoreLess extends StatelessWidget {
         assert(
           ((readLessText == null && readMoreText == null) || customButtonBuilder == null),
           'You cannot provide readLess or readMore text when using a custom button builder',
-        ),
-        super(key: key);
+        );
 
   /// The main text to be displayed.
   final String text;
