@@ -1,10 +1,10 @@
 name: read_more_less
 description: Provides a widget that shows a read more/less button in case the text exceeds the maxHeight provided in the widget.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/DutchCodingCompany/read_more_less
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=3.4.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -14,7 +14,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
+  very_good_analysis: ^6.0.0
 
 flutter:
   assets:

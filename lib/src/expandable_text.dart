@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:read_more_less/src/expandable_text_button.dart';
+import 'package:read_more_less/src/html_container.dart';
 
-import 'expandable_text_button.dart';
-import 'html_container.dart';
-
+/// {@template expandable_text}
+/// A widget that displays a text that can be expanded or collapsed.
+/// {@endtemplate}
 class ExpandableText extends StatefulWidget {
+  /// {@macro expandable_text}
   const ExpandableText({
     required this.text,
     required this.textStyle,
@@ -20,17 +23,46 @@ class ExpandableText extends StatefulWidget {
     this.buttonTextStyle,
   });
 
+  /// The main text to be displayed.
   final String text;
+
+  /// The text to be displayed on the readless button.
   final String? readLessText;
+
+  /// The text to be displayed on the readmore button.
   final String? readMoreText;
+
+  /// The duration of the animation when transitioning between read more
+  /// and less.
   final Duration animationDuration;
+
+  /// The height of the [text] in the collapsed state.
   final double collapsedHeight;
+
+  /// The text style of the [text].
   final TextStyle textStyle;
+
+  /// The icon to be displayed when the text is expanded.
   final Widget? iconExpanded;
+
+  /// The icon to be displayed when the text is collapsed.
   final Widget? iconCollapsed;
-  final Widget Function(bool isCollapsed, VoidCallback onPressed)? customButtonBuilder;
+
+  /// A custom button builder to be used instead of the default button.
+  final Widget Function(
+    // Single bool parameter which seems clear to me
+    // ignore: avoid_positional_boolean_parameters
+    bool isCollapsed,
+    VoidCallback onPressed,
+  )? customButtonBuilder;
+
+  /// The alignment of the [text].
   final TextAlign textAlign;
+
+  /// The color of the icon.
   final Color iconColor;
+
+  /// The text style of the button.
   final TextStyle? buttonTextStyle;
 
   @override
@@ -42,8 +74,9 @@ class _ExpandableTextState extends State<ExpandableText> {
 
   void _toggleExpand() {
     setState(() {
-      _crossFadeState =
-          _crossFadeState == CrossFadeState.showSecond ? CrossFadeState.showFirst : CrossFadeState.showSecond;
+      _crossFadeState = _crossFadeState == CrossFadeState.showSecond
+          ? CrossFadeState.showFirst
+          : CrossFadeState.showSecond;
     });
   }
 
@@ -77,7 +110,10 @@ class _ExpandableTextState extends State<ExpandableText> {
           crossFadeState: _crossFadeState,
         ),
         if (widget.customButtonBuilder != null)
-          widget.customButtonBuilder!(_crossFadeState == CrossFadeState.showFirst, _toggleExpand)
+          widget.customButtonBuilder!(
+            _crossFadeState == CrossFadeState.showFirst,
+            _toggleExpand,
+          )
         else
           ExpandableTextButton(
             expanded: _crossFadeState == CrossFadeState.showSecond,
