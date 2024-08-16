@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'expandable_text_button.dart';
-import 'html_container.dart';
+import 'package:read_more_less/src/expandable_text_button.dart';
+import 'package:read_more_less/src/html_container.dart';
 
 class ExpandableText extends StatefulWidget {
   const ExpandableText({
@@ -28,7 +27,12 @@ class ExpandableText extends StatefulWidget {
   final TextStyle textStyle;
   final Widget? iconExpanded;
   final Widget? iconCollapsed;
-  final Widget Function(bool isCollapsed, VoidCallback onPressed)? customButtonBuilder;
+  final Widget Function(
+    // Single bool parameter which seems clear to me
+    // ignore: avoid_positional_boolean_parameters
+    bool isCollapsed,
+    VoidCallback onPressed,
+  )? customButtonBuilder;
   final TextAlign textAlign;
   final Color iconColor;
   final TextStyle? buttonTextStyle;
@@ -42,8 +46,9 @@ class _ExpandableTextState extends State<ExpandableText> {
 
   void _toggleExpand() {
     setState(() {
-      _crossFadeState =
-          _crossFadeState == CrossFadeState.showSecond ? CrossFadeState.showFirst : CrossFadeState.showSecond;
+      _crossFadeState = _crossFadeState == CrossFadeState.showSecond
+          ? CrossFadeState.showFirst
+          : CrossFadeState.showSecond;
     });
   }
 
@@ -77,7 +82,10 @@ class _ExpandableTextState extends State<ExpandableText> {
           crossFadeState: _crossFadeState,
         ),
         if (widget.customButtonBuilder != null)
-          widget.customButtonBuilder!(_crossFadeState == CrossFadeState.showFirst, _toggleExpand)
+          widget.customButtonBuilder!(
+            _crossFadeState == CrossFadeState.showFirst,
+            _toggleExpand,
+          )
         else
           ExpandableTextButton(
             expanded: _crossFadeState == CrossFadeState.showSecond,

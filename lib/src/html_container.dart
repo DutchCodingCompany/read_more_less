@@ -11,7 +11,8 @@ class HtmlContainer extends StatelessWidget {
     return Html(
       data: content,
       style: {
-        //These body elements are added to prevent the HTML from adding spacings to it.
+        //These body elements are added to prevent the HTML from adding spacings
+        // to it.
         //The 'body' tag sets the horizontal padding and margin to zero.
         //The 'body > *:(first/last)-child' will set the top/bottom padding to zero,
         //so the first and last body field won't add spacings on the top/bottom
@@ -35,7 +36,7 @@ class HtmlContainer extends StatelessWidget {
 
 extension HTMLRecognizer on String {
   bool get isHtml {
-    final RegExp htmlRegex = RegExp(r'<\s*([^ >]+)[^>]*>.*?<\s*/\s*\1\s*>');
+    final htmlRegex = RegExp(r'<\s*([^ >]+)[^>]*>.*?<\s*/\s*\1\s*>');
     return htmlRegex.hasMatch(this);
   }
 }

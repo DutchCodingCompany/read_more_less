@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'expandable_text.dart';
+import 'package:read_more_less/src/expandable_text.dart';
 
 class ReadMoreLess extends StatelessWidget {
   const ReadMoreLess({
-    super.key,
     required this.text,
     this.readLessText,
     this.readMoreText,
@@ -18,29 +16,37 @@ class ReadMoreLess extends StatelessWidget {
     this.customButtonBuilder,
     this.iconColor = Colors.black,
     this.buttonTextStyle,
+    super.key,
   })  : assert(
-          ((iconCollapsed == null && iconExpanded == null) || customButtonBuilder == null),
+          (iconCollapsed == null && iconExpanded == null) ||
+              customButtonBuilder == null,
           'You cannot use custom icons while using a custom button builder',
         ),
         assert(
-          (buttonTextStyle == null || customButtonBuilder == null),
-          'You cannot use a custom button style while using a custom button builder',
+          buttonTextStyle == null || customButtonBuilder == null,
+          'You cannot use a custom button style while using a custom '
+          'button builder',
         ),
         assert(
-          ((readLessText == null && readMoreText == null) || customButtonBuilder == null),
-          'You cannot provide readLess or readMore text when using a custom button builder',
+          (readLessText == null && readMoreText == null) ||
+              customButtonBuilder == null,
+          'You cannot provide readLess or readMore text when using '
+          'a custom button builder',
         );
 
   /// The main text to be displayed.
   final String text;
 
-  /// The text on the button when the text is expanded, in case the text overflows
+  /// The text on the button when the text is expanded,
+  /// in case the text overflows
   final String? readLessText;
 
-  /// The text on the button when the text is collapsed, in case the text overflows
+  /// The text on the button when the text is collapsed,
+  /// in case the text overflows
   final String? readMoreText;
 
-  /// The duration of the animation when transitioning between read more and read less.
+  /// The duration of the animation when transitioning between read more and
+  /// read less.
   final Duration animationDuration;
 
   /// The height of the [text] in the collapsed state.
@@ -61,9 +67,21 @@ class ReadMoreLess extends StatelessWidget {
   /// Allows a widget to replace the icon in the read more/less button in the expanded state.
   final Widget? iconExpanded;
 
-  /// Allows for a function that builds a custom clickable widget. [isCollapsed] is provided to detimine in what state
-  /// the widget has to be built. [onPressed] is provided to allow for the widget to be clickable and to trigger the collapsed state.
-  final Widget Function(bool isCollapsed, VoidCallback onPressed)? customButtonBuilder;
+  /// Allows for a function that builds a custom clickable widget.
+  // Refers to the custom button builder in the ExpandableText widget
+  // ignore: comment_references
+  /// [isCollapsed] is provided to detimine in what state
+  /// the widget has to be built.
+  // Refers to the custom button builder in the ExpandableText widget
+  // ignore: comment_references
+  /// [onPressed] is provided to allow for the widget to be clickable and to
+  /// trigger the collapsed state.
+  final Widget Function(
+    // Single bool parameter which seems clear to me
+    // ignore: avoid_positional_boolean_parameters
+    bool isCollapsed,
+    VoidCallback onPressed,
+  )? customButtonBuilder;
 
   /// The color of the icon in the read more/less button. Does not work when [iconCollapsed] or [iconExpanded] are specified.
   final Color iconColor;
@@ -79,16 +97,14 @@ class ReadMoreLess extends StatelessWidget {
       textAlign: textAlign,
       textDirection: TextDirection.ltr,
       text: span,
-    );
-
-    tp.layout(maxWidth: size.maxWidth);
+    )..layout(maxWidth: size.maxWidth);
 
     return tp.didExceedMaxLines;
   }
 
   @override
   Widget build(BuildContext context) {
-    TextStyle ts = textStyle ?? Theme.of(context).textTheme.bodyMedium!;
+    final ts = textStyle ?? Theme.of(context).textTheme.bodyMedium!;
 
     return Column(
       children: <Widget>[
@@ -109,7 +125,13 @@ class ReadMoreLess extends StatelessWidget {
                     iconColor: iconColor,
                     buttonTextStyle: buttonTextStyle,
                   )
-                : Text(text, softWrap: true, overflow: TextOverflow.fade, textAlign: textAlign, style: ts);
+                : Text(
+                    text,
+                    softWrap: true,
+                    overflow: TextOverflow.fade,
+                    textAlign: textAlign,
+                    style: ts,
+                  );
           },
         ),
       ],

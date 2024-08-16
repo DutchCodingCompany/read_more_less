@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class ExpandableTextButton extends StatelessWidget {
   const ExpandableTextButton({
-    super.key,
     required this.expanded,
     required this.toggleExpand,
     this.readLessText,
@@ -11,6 +10,7 @@ class ExpandableTextButton extends StatelessWidget {
     this.iconExpanded,
     this.iconCollapsed,
     this.iconColor,
+    super.key,
   });
 
   final bool expanded;
