@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:read_more_less/src/expandable_text.dart';
 
+/// {@template read_more_less}
+/// A widget that displays a text that can be expanded or collapsed.
+/// {@endtemplate}
 class ReadMoreLess extends StatelessWidget {
+  /// {@macro read_more_less}
   const ReadMoreLess({
     required this.text,
     this.readLessText,
@@ -89,7 +93,7 @@ class ReadMoreLess extends StatelessWidget {
   /// The textstyle used for the read more/less button
   final TextStyle? buttonTextStyle;
 
-  bool exceedsMaxLines(TextStyle textStyle, BoxConstraints size) {
+  bool _exceedsMaxLines(TextStyle textStyle, BoxConstraints size) {
     final span = TextSpan(text: text, style: textStyle);
 
     final tp = TextPainter(
@@ -110,7 +114,7 @@ class ReadMoreLess extends StatelessWidget {
       children: <Widget>[
         LayoutBuilder(
           builder: (context, size) {
-            return exceedsMaxLines(ts, size)
+            return _exceedsMaxLines(ts, size)
                 ? ExpandableText(
                     text: text,
                     animationDuration: animationDuration,

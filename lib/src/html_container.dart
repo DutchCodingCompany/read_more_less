@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
+/// {@template html_container}
+/// A widget that displays HTML content.
+/// {@endtemplate}
 class HtmlContainer extends StatelessWidget {
+  /// {@macro html_container}
   const HtmlContainer({required this.content, super.key});
 
+  /// The String HTML content to be displayed.
   final String? content;
 
   @override
@@ -34,7 +39,9 @@ class HtmlContainer extends StatelessWidget {
   }
 }
 
+/// Extension for [String] to determine if the string is HTML
 extension HTMLRecognizer on String {
+  /// Returns `true` if the string is HTML
   bool get isHtml {
     final htmlRegex = RegExp(r'<\s*([^ >]+)[^>]*>.*?<\s*/\s*\1\s*>');
     return htmlRegex.hasMatch(this);
